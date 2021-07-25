@@ -1,0 +1,73 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zample/components/landing/bloc/cubit/social_links_cubit.dart';
+import 'package:zample/components/landing/ui/widgets/social_links.dart';
+
+/// Die LandingPage dient zur Authentifizierung
+/// des Users.
+class LandingPage extends StatelessWidget {
+  static const String route = 'landig_page';
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Stack(
+      children: [
+        Container(
+          height: size.height,
+          width: size.width,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/background.jpeg"),
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: LayoutBuilder(
+            builder: (context, constraints) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    minHeight: constraints.maxHeight,
+                  ),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        Container(
+                          height: 40.0,
+                        ),
+                        Container(
+                          padding: const EdgeInsets.only(
+                              left: 100.0, right: 100, top: 100, bottom: 20),
+                          alignment: Alignment.topCenter,
+                          child: Image.asset(
+                            "assets/images/zample.png",
+                            height: 120,
+                            width: 120,
+                          ),
+                        ),
+                        Text("Welcome to Zample",
+                            style: TextStyle(
+                                fontSize: 25, color: Colors.grey[400])),
+                        Text("Choose a login Option",
+                            style: TextStyle(
+                                fontSize: 18, color: Colors.grey[400])),
+                        const SizedBox(height: 120),
+                        BlocProvider<SocialLinksCubit>(
+                          create: (_) => SocialLinksCubit(),
+                          child: SocialLinks(),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}

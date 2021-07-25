@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'dart:io';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -32,7 +33,7 @@ class ZampleErrorHandler with ZampleLogger {
   /// Prints it to the console otherwise.
   Future<void> _handleFlutterError(FlutterErrorDetails details) async {
     if (kReleaseMode) {
-      throw UnimplementedError();
+      await FirebaseCrashlytics.instance.recordFlutterError(details);
     } else {
       FlutterError.dumpErrorToConsole(details);
     }
@@ -46,7 +47,7 @@ class ZampleErrorHandler with ZampleLogger {
     }
     if (kReleaseMode) {
     } else {
-      throw UnimplementedError();
+      await FirebaseCrashlytics.instance.recordError(error, stackTrace);
     }
   }
 }

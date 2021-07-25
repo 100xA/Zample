@@ -31,7 +31,16 @@ dependencies:
   cupertino_icons: ^1.0.2
   get_it: ^6.1.1
   logging: ^1.0.1
-  sentry_flutter: ^5.0.0
+  firebase_core: ^1.3.0
+  firebase_crashlytics: ^2.0.7
+  bloc: ^7.0.0
+  flutter_bloc: ^7.0.0
+  equatable: ^2.0.2
+  firebase_auth: ^3.0.1
+  cloud_firestore: ^1.0.2
+  shared_preferences: ^2.0.5
+  google_sign_in: ^4.5.5
+
 
 dev_dependencies:
   flutter_test:
@@ -42,6 +51,8 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
+  assets:
+    - assets/images/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
