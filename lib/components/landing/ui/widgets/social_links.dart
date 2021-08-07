@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zample/components/landing/bloc/cubit/social_links_cubit.dart';
 import 'package:zample/components/landing/bloc/cubit/social_links_state.dart';
-
 import 'package:zample/misc/theme/colors.dart';
 
 class SocialLinks extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return BlocListener<SocialLinksCubit, SocialLinksState>(
       listener: (context, state) {
         if (state.error.trim().isNotEmpty) {
@@ -22,7 +22,6 @@ class SocialLinks extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                backgroundColor: redColor,
                 duration: const Duration(seconds: 2),
               ),
             );
@@ -41,54 +40,25 @@ class SocialLinks extends StatelessWidget {
                 width: 60,
               ),
             ),
-            const SizedBox(height: 250.0),
-            const Text(
-              "© Zample 2021",
-              style: TextStyle(
-                color: Colors.yellow,
+            SizedBox(
+              height: size.height * 0.225,
+            ),
+            InkWell(
+              onTap: () => context.read<SocialLinksCubit>().noLogin(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Or continue without a profile",
+                      style: Theme.of(context).textTheme.headline6),
+                  Icon(
+                    Icons.arrow_forward_ios,
+                    color: yellowColor,
+                  ),
+                ],
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  final VoidCallback? onPressed;
-  final Widget? prefix;
-  final String? text;
-
-  const LoginButton({
-    Key? key,
-    this.onPressed,
-    this.prefix,
-    this.text,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      padding: const EdgeInsets.all(0),
-      color: Colors.white,
-      onPressed: onPressed,
-      child: Row(
-        children: [
-          Container(
-            height: 50.0,
-            width: 90.0,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30.0,
-              vertical: 12.0,
-            ),
-            child: prefix,
-          ),
-          Text(text!),
-        ],
       ),
     );
   }

@@ -1,4 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:zample/components/home/bloc/cubit/home_cubit.dart';
+import 'package:zample/components/landing/bloc/cubit/social_links_cubit.dart';
+import 'package:zample/components/landing/ui/widgets/social_links.dart';
+import 'package:zample/components/profile/bloc/cubit/profile_cubit.dart';
 import 'package:zample/components/profile/repo/firebase_profile_repository.dart';
 import 'package:zample/components/profile/repo/profile_repository.dart';
 import 'package:zample/core/bloc/app/app_cubit.dart';
@@ -21,5 +25,8 @@ void setupServices() {
     ..registerLazySingleton<NavigatorService>(() => NavigatorService())
     ..registerLazySingleton<SharedPreferencesService>(
         () => SharedPreferencesService())
-    ..registerLazySingleton<ThemeCubit>(() => ThemeCubit());
+    ..registerLazySingleton<ThemeCubit>(() => ThemeCubit())
+    ..registerLazySingleton<HomeCubit>(() => HomeCubit())
+    ..registerLazySingleton<ProfileCubit>(() => ProfileCubit())
+    ..registerLazySingleton<SocialLinksCubit>(() => SocialLinksCubit());
 }

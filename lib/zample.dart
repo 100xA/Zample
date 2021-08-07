@@ -7,6 +7,7 @@ import 'package:zample/core/bloc/theme/theme_state.dart';
 
 import 'package:zample/core/services/navigator_service.dart';
 
+import 'core/bloc/theme/themes.dart';
 import 'core/services/service_locator.dart';
 
 class Zample extends StatelessWidget {
@@ -16,9 +17,11 @@ class Zample extends StatelessWidget {
       return WillPopScope(
         onWillPop: () async => false,
         child: MaterialApp(
+          theme: darkTheme,
           debugShowCheckedModeBanner: false,
           navigatorKey: app.get<NavigatorService>().key,
           onGenerateRoute: app.get<NavigatorService>().onGenerateRoute,
+          initialRoute: app.get<NavigatorService>().initialRoute,
         ),
       );
     });

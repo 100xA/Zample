@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:zample/components/home/bloc/cubit/home_cubit.dart';
 import 'package:zample/core/bloc/app/app_cubit.dart';
 import 'package:zample/core/bloc/auth/cubit/auth_cubit.dart';
 import 'package:zample/core/bloc/theme/theme_cubit.dart';
 import 'package:zample/core/services/service_locator.dart';
 
 class GlobalBlocProvider extends StatelessWidget {
-  const GlobalBlocProvider({required this.child});
+  const GlobalBlocProvider({this.child});
   final Widget child;
 
   @override
@@ -21,6 +22,9 @@ class GlobalBlocProvider extends StatelessWidget {
         ),
         BlocProvider<ThemeCubit>.value(
           value: app.get<ThemeCubit>()..initialize(),
+        ),
+        BlocProvider<HomeCubit>.value(
+          value: app.get<HomeCubit>(),
         ),
       ],
       child: child,

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-const redColor = Color.fromRGBO(231, 45, 43, 1);
-const darkGreyColor = Color.fromRGBO(38, 36, 49, 1);
-const darkRedColor = Color.fromRGBO(185, 11, 19, 1);
-const greyColor = Color.fromRGBO(61, 65, 89, 1);
-const blueColor = Color.fromRGBO(1, 4, 56, 1);
+const yellowColor = Color.fromRGBO(255, 212, 95, 1);
+const lightGreyColor = Color.fromRGBO(224, 224, 224, 1);
+const darkGreyColor = Color.fromRGBO(45, 45, 45, 1);

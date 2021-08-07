@@ -7,14 +7,13 @@ class FirebaseAuthRepository extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
 
-  FirebaseAuthRepository(
-      {FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn})
+  FirebaseAuthRepository({FirebaseAuth firebaseAuth, GoogleSignIn googleSignIn})
       : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
 
   @override
-  User? getCurrentUser() {
-    final User? user = _firebaseAuth.currentUser;
+  User getCurrentUser() {
+    final User user = _firebaseAuth.currentUser;
     if (null != user) {
       user.reload();
     }

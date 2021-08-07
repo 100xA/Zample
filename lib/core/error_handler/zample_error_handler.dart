@@ -10,7 +10,7 @@ import 'package:zample/core/logger/logger_mixin.dart';
 
 class ZampleErrorHandler with ZampleLogger {
   ZampleErrorHandler({
-    required Widget child,
+    Widget child,
   }) {
     if (kReleaseMode) {
       // override the error widget in release mode (the red error screen)

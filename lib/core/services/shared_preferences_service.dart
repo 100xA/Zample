@@ -8,7 +8,7 @@ class SharedPreferencesService {
 
   Future<bool> isLightTheme() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final bool? val = prefs.getBool("light_theme");
+    final bool val = prefs.getBool("light_theme");
     return val ?? false;
   }
 }
