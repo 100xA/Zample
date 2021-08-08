@@ -17,11 +17,9 @@ git clone -b master https://github.com/Jbinoggi/zample.git
 
 * Website: pstarterapp.de
 * Github: [@Jbinoggi](https://github.com/Jbinoggi)
-* LinkedIn: [@Jan Biernacki](https://linkedin.com/in/Jan Biernacki)
+* LinkedIn: [@Jan Biernacki](https://www.linkedin.com/in/jan-biernacki-934221200/)
 
 ## Show your support
 
 Give a ⭐️ if this project helped you!
 
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
