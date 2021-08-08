@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:zample/components/home/ui/home_screen.dart';
 import 'package:zample/components/landing/bloc/cubit/social_links_state.dart';
-import 'package:zample/components/profile/bloc/cubit/profile_cubit.dart';
 
 import 'package:zample/core/bloc/auth/cubit/auth_cubit.dart';
 import 'package:zample/core/repo/auth_repository.dart';
@@ -34,6 +33,30 @@ class SocialLinksCubit extends Cubit<SocialLinksState> {
       switch (e.code) {
         case "account-exists-with-different-credential":
           error = "Die E-Mail wurde schon über eine ander Anmeldung verwendet!";
+          break;
+      }
+      emit(state.copyWith(error: error, loading: false));
+    } catch (e) {
+      emit(state.copyWith(error: error, loading: false));
+      FirebaseCrashlytics.instance.recordError(e, null);
+    }
+  }
+
+  Future<void> logInWithFacebook() async {
+    emit(state.copyWith(error: "", loading: true));
+    String error =
+        "Es ist ein Fehler bei der Anmeldung aufgetreten, oder du hast dich mit einem anderem Service angemeldet!";
+    try {
+      await _authRepository.logInWithFacebook();
+      await _authCubit.initialize();
+
+      _navigatorService.pushReplacementNamed(HomeScreen.route);
+      emit(state.copyWith(error: "", loading: false));
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        default:
+          error =
+              "Die E-Mail wurde schon über eine ander Anmeldung verwendet, oder du hast dich mit einem anderem Service angemeldet!";
           break;
       }
       emit(state.copyWith(error: error, loading: false));

@@ -1,16 +1,27 @@
-# zample
+<h1 align="center">Welcome to Zample 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.1-blue.svg?cacheSeconds=2592000" />
+</p>
 
-A new Flutter project.
+> An Flutter Project for Idea validation
 
-## Getting Started
+## Install
 
-This project is a starting point for a Flutter application.
+```sh
+git clone -b master https://github.com/Jbinoggi/zample.git
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Author
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+👤 **Jan Biernacki**
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Website: pstarterapp.de
+* Github: [@Jbinoggi](https://github.com/Jbinoggi)
+* LinkedIn: [@Jan Biernacki](https://linkedin.com/in/Jan Biernacki)
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
