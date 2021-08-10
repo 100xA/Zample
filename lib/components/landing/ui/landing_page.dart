@@ -53,7 +53,7 @@ class LandingPage extends StatelessWidget {
                         ),
                         Text("Choose a login Option",
                             style: Theme.of(context).textTheme.headline6),
-                        SizedBox(height: size.height * 0.18),
+                        SizedBox(height: size.height * 0.1),
                         BlocProvider<SocialLinksCubit>(
                           create: (_) => SocialLinksCubit(),
                           child: SocialLinks(),

@@ -23,12 +23,15 @@ class HomeScreen extends StatelessWidget {
           showElevation: true,
           backgroundColor: Theme.of(context).highlightColor,
           selectedIndex: state.index,
-          containerHeight: size.height * 0.08,
+          containerHeight: size.height * 0.07,
           onItemSelected: (value) =>
               context.read<HomeCubit>().switchToTab(value),
           items: [
             ZampleBottomNavyBarItem(
-              title: Text("Home", style: Theme.of(context).textTheme.button),
+              title: Text("Home",
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.button.color,
+                      fontSize: size.height * 0.02)),
               activeColor: Theme.of(context).backgroundColor,
               icon: state.index == 0
                   ? const Icon(
@@ -38,7 +41,10 @@ class HomeScreen extends StatelessWidget {
                   : const Icon(Icons.home),
             ),
             ZampleBottomNavyBarItem(
-                title: Text("Chat", style: Theme.of(context).textTheme.button),
+                title: Text("Chat",
+                    style: TextStyle(
+                        color: Theme.of(context).textTheme.button.color,
+                        fontSize: size.height * 0.02)),
                 activeColor: Theme.of(context).backgroundColor,
                 icon: state.index == 1
                     ? const Icon(
@@ -54,7 +60,10 @@ class HomeScreen extends StatelessWidget {
                       color: yellowColor,
                     )
                   : const Icon(Icons.star),
-              title: Text("Star", style: Theme.of(context).textTheme.button),
+              title: Text("Star",
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.button.color,
+                      fontSize: size.height * 0.02)),
             ),
             ZampleBottomNavyBarItem(
               activeColor: Theme.of(context).backgroundColor,
@@ -64,7 +73,10 @@ class HomeScreen extends StatelessWidget {
                       color: yellowColor,
                     )
                   : const Icon(Icons.person),
-              title: Text("Profile", style: Theme.of(context).textTheme.button),
+              title: Text("Profile",
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.button.color,
+                      fontSize: size.height * 0.02)),
             ),
           ],
         ),

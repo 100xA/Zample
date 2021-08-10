@@ -14,6 +14,7 @@ class AuthCubit extends Cubit<dynamic> {
       'https://firebasestorage.googleapis.com/v0/b/zample-95803.appspot.com/o/ressources%2Fexternal-content.duckduckgo.com.png?alt=media&token=c4048d1a-4d3a-471f-96eb-03b9d3c1a6a1';
   final AuthRepository _authRepository = app.get<AuthRepository>();
   final NavigatorService _navigatorService = app.get<NavigatorService>();
+  final ProfileCubit _profileCubit = app.get<ProfileCubit>();
   Future<void> initialize() async {
     // Check if user is authenticated
     final User firebaseUser = FirebaseAuth.instance.currentUser;
@@ -28,6 +29,7 @@ class AuthCubit extends Cubit<dynamic> {
         final Profile profile = await _createDefaultProfile(firebaseUser);
         await _profileRepository.create(profile: profile);
       }
+      await _profileCubit.initialize();
     }
   }
 
@@ -44,9 +46,8 @@ class AuthCubit extends Cubit<dynamic> {
 
   Future<void> logOutRequested() async {
     await _authRepository.signOut();
-    app.get<ProfileCubit>().reset();
-    ;
 
+    app.get<ProfileCubit>().reset();
     // navigate to landing
     _navigatorService.pushReplacementNamed(LandingPage.route);
   }

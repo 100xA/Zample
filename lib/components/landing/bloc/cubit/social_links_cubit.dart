@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:zample/components/home/ui/home_screen.dart';
 import 'package:zample/components/landing/bloc/cubit/social_links_state.dart';
+import 'package:zample/components/profile/bloc/cubit/profile_cubit.dart';
+import 'package:zample/components/profile/repo/profile_repository.dart';
 
 import 'package:zample/core/bloc/auth/cubit/auth_cubit.dart';
 import 'package:zample/core/repo/auth_repository.dart';
@@ -14,6 +16,7 @@ class SocialLinksCubit extends Cubit<SocialLinksState> {
   final AuthCubit _authCubit = app.get<AuthCubit>();
 
   final NavigatorService _navigatorService = app.get<NavigatorService>();
+  final ProfileCubit _profileCubit = app.get<ProfileCubit>();
 
   SocialLinksCubit() : super(const SocialLinksState());
 
@@ -25,9 +28,10 @@ class SocialLinksCubit extends Cubit<SocialLinksState> {
     String error =
         "Es ist ein Fehler bei der Anmeldung aufgetreten, oder du hast dich mit einem anderem Service angemeldet!";
     try {
-      final credentials = await _authRepository.logInWithGoogle();
+      await _authRepository.logInWithGoogle();
       emit(state.copyWith(error: "", loading: false));
       await _authCubit.initialize();
+      await _profileCubit.initialize();
       _navigatorService.pushReplacementNamed(HomeScreen.route);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
@@ -49,7 +53,7 @@ class SocialLinksCubit extends Cubit<SocialLinksState> {
     try {
       await _authRepository.logInWithFacebook();
       await _authCubit.initialize();
-
+      await _profileCubit.initialize();
       _navigatorService.pushReplacementNamed(HomeScreen.route);
       emit(state.copyWith(error: "", loading: false));
     } on FirebaseAuthException catch (e) {

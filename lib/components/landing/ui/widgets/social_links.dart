@@ -41,7 +41,23 @@ class SocialLinks extends StatelessWidget {
               height: 90,
             ),
             InkWell(
-              onTap: () => context.read<SocialLinksCubit>().noLogin(),
+              onTap: () => {
+                // context.read<SocialLinksCubit>().noLogin(),
+                ScaffoldMessenger.of(context)
+                  ..hideCurrentSnackBar()
+                  ..showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        "Currently not available",
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      duration: const Duration(seconds: 2),
+                    ),
+                  )
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
