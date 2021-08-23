@@ -7,9 +7,10 @@ abstract class ProfileRepository {
   Future<void> update({
     Profile profile,
   });
-  Future<void> setDesc({String desc});
+
   Future<Profile> get();
   Future<void> delete();
+  Future<void> deleteProfilePicture();
   Future<bool> exists();
   Stream<Profile> get profileStream;
 }

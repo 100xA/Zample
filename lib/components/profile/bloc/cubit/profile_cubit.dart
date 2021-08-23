@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -13,14 +12,14 @@ import 'package:zample/components/profile/bloc/cubit/profile_state.dart';
 
 import 'package:zample/components/profile/repo/profile.dart';
 import 'package:zample/components/profile/repo/profile_repository.dart';
+import 'package:zample/core/bloc/auth/cubit/auth_cubit.dart';
 
 import 'package:zample/core/services/service_locator.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileRepository _profileRepository = app.get<ProfileRepository>();
   StreamSubscription<Profile> _profileSubscription;
-  final CollectionReference _profileCollection =
-      FirebaseFirestore.instance.collection('profile');
+  final AuthCubit _authCubit = app.get<AuthCubit>();
 
   bool _initialized = false;
   ProfileCubit() : super(const ProfileState());
@@ -28,12 +27,19 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> initialize() async {
     if (!_initialized) {
       final Profile profile = await _profileRepository.get();
-      emit(state.copyWith(profile: profile));
+      print(profile.description);
+      await emit(state.copyWith(profile: profile));
       _profileSubscription = _profileRepository.profileStream.listen(
         (data) => emit(state.copyWith(profile: data)),
       );
+
       _initialized = true;
     }
+  }
+
+  Future<void> reload() async {
+    await _profileSubscription?.cancel();
+    initialize();
   }
 
   /// This method picks an image from the gallery, uploads it to firebase storage
@@ -59,7 +65,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           hideBottomControls: true,
         ),
       );
-      Profile profile = state.profile;
+      final Profile profile = state.profile;
 
       /// upload image to firebase storage
       final ref = FirebaseStorage.instance
@@ -83,18 +89,23 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
 
-  Future<void> writeNewDescription(String description) async {
-    print("Das setze ich rein " + description);
-    //TODO: [ZAMP-172]: The method update() does not allow to be copywith()
+  Future<void> updateDescription(String description) async {
+    emit(state.copyWith(
+        profile: state.profile.copyWith(description: description)));
+    await emit(state);
+  }
+
+  Future<void> writeNewDescription() async {
+    final Profile profile = state.profile;
+
     await app.get<ProfileRepository>().update(
-            profile: Profile(
-          description: description,
-          avatarUrl: state.profile.avatarUrl,
-          email: state.profile.email,
-          uid: state.profile.uid,
-          username: state.profile.username,
-        ));
-    emit(state);
+        profile: profile.copyWith(description: state.profile.description));
+  }
+
+  Future<void> deleteAcc() async {
+    await _authCubit.logOutRequested();
+    await _profileRepository.deleteProfilePicture();
+    await _profileRepository.delete();
   }
 
   @override

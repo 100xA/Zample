@@ -5,9 +5,11 @@ import 'package:zample/core/services/service_locator.dart';
 
 class CustomAvatar extends StatelessWidget {
   final String imageUrl;
+  final Size size;
 
   const CustomAvatar({
     Key key,
+    @required this.size,
     @required this.imageUrl,
   }) : super(key: key);
 
@@ -18,10 +20,10 @@ class CustomAvatar extends StatelessWidget {
         child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: CachedNetworkImage(
-              imageUrl: imageUrl ?? "assets/images/blank-profile-picture.png",
+              imageUrl: imageUrl,
               imageBuilder: (context, imageProvider) => Container(
-                width: 130,
-                height: 180,
+                width: size.width * 0.3,
+                height: size.height * 0.2,
                 decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   image: DecorationImage(

@@ -38,14 +38,14 @@ class AuthCubit extends Cubit<dynamic> {
       email: usr.email,
       username:
           usr.displayName ?? usr.email.substring(0, usr.email.indexOf('@')),
-      description: null,
+      description: "Meine Beschreibung",
     );
   }
 
   Future<void> logOutRequested() async {
     await _authRepository.signOut();
-    app.get<ProfileCubit>().reset();
-    ;
+
+    await app.get<ProfileCubit>().reset();
 
     // navigate to landing
     _navigatorService.pushReplacementNamed(LandingPage.route);
