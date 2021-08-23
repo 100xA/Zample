@@ -19,5 +19,6 @@ class AppCubit extends Cubit<AppState> {
       emit(state.copyWith(errorMsg: e.toString()));
       FirebaseCrashlytics.instance.recordError(e, null);
     }
+    emit(state.copyWith(loading: false));
   }
 }

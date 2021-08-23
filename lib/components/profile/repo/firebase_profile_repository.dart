@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:zample/components/profile/repo/profile.dart';
 import 'package:zample/components/profile/repo/profile_repository.dart';
 
@@ -45,15 +46,18 @@ class FirebaseProfileRepository extends ProfileRepository {
   }
 
   @override
-  Future<void> setDesc({String desc}) async {
-    return _profileCollection
-        .doc(FirebaseAuth.instance.currentUser.uid)
-        .set({'description': desc});
-  }
-
-  @override
   Stream<Profile> get profileStream => _profileCollection
       .doc(FirebaseAuth.instance.currentUser.uid)
       .snapshots()
       .map((snapshot) => Profile.fromJson(snapshot.data()));
+
+  @override
+  Future<void> deleteProfilePicture() async {
+    final refPic = FirebaseStorage.instance
+        .ref()
+        .child("users/${FirebaseAuth.instance.currentUser.uid}/profile.jpg");
+    try {
+      await refPic.delete();
+    } catch (e) {}
+  }
 }

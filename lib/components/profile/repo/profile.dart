@@ -11,9 +11,10 @@ class Profile extends Equatable {
   /// email of the user -> can be
   final String email;
 
-  ///
+  /// username of the user -> is given by the email
   final String username;
 
+  /// description of the user -> either user-changed or "Meine Beschreibung" as default
   final String description;
 
   const Profile(

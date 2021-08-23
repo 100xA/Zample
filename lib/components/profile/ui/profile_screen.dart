@@ -4,53 +4,46 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:zample/components/profile/bloc/cubit/profile_cubit.dart';
 import 'package:zample/components/profile/bloc/cubit/profile_state.dart';
 import 'package:zample/components/profile/ui/widgets/custom_avatar.dart';
+import 'package:zample/components/settings/settings_screen.dart';
 import 'package:zample/core/bloc/auth/cubit/auth_cubit.dart';
 import 'package:zample/core/services/service_locator.dart';
 import 'package:zample/misc/theme/colors.dart';
 
 class ProfileScreen extends StatelessWidget {
   static const route = "profile_screen";
-  static GlobalKey<FormState> _formKey = new GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    TextEditingController descController = new TextEditingController();
+    bool show = false;
 
     return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/background_profile.png"),
-              fit: BoxFit.fill),
-        ),
-        child: BlocConsumer<ProfileCubit, ProfileState>(
-          listener: (context, state) {
-            if (state.profile.uid == null) {
-              ScaffoldMessenger.of(context)
-                ..hideCurrentSnackBar()
-                ..showSnackBar(
-                  SnackBar(
-                    content: Text(
-                      "Lade",
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
-            }
-          },
-          builder: (context, state) => SafeArea(
-            child: Container(
+      body: SafeArea(
+        child:
+            BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
+          if (state.profile?.description == null) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/background_profile.png"),
+                    fit: BoxFit.fill),
+              ),
               child: Stack(
                 children: [
                   Positioned(
                     right: size.width * 0.02,
                     top: size.height * 0.02,
                     child: IconButton(
-                      onPressed: () => {app.get<AuthCubit>().logOutRequested()},
+                      onPressed: () => {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                              builder: (context) => SettingsScreen()),
+                        ),
+                      },
                       iconSize: 30,
                       icon: const Icon(Icons.settings, color: darkGreyColor),
                     ),
@@ -77,11 +70,14 @@ class ProfileScreen extends StatelessWidget {
                         color: Theme.of(context).backgroundColor,
                       ),
                       child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               SizedBox(
-                                width: size.width * 0.35,
+                                width: size.width * 0.3,
                               ),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -153,29 +149,74 @@ class ProfileScreen extends StatelessWidget {
                             ],
                           ),
                           SizedBox(
-                            height: size.height * 0.05,
+                            height: size.height * 0.02,
                           ),
-                          Container(
-                              height: size.height * 0.1,
-                              padding: EdgeInsets.only(
-                                  left: size.width * 0.05,
-                                  right: size.width * 0.05),
-                              child: GestureDetector(
-                                onTap: () {
-                                  _displayDialog(context);
-                                },
-                                child: Text(
-                                  state.profile?.description ??
-                                      "Kurze Beschreibung",
-                                  style: Theme.of(context).textTheme.headline6,
-                                ),
-                              )),
+                          Expanded(
+                            child: TextFormField(
+                              textInputAction: TextInputAction.done,
+                              buildCounter: (BuildContext context,
+                                  {int currentLength,
+                                  int maxLength,
+                                  bool isFocused}) {
+                                if (show) {
+                                  return Text(
+                                    '$currentLength/$maxLength',
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1
+                                            .color),
+                                  );
+                                } else {
+                                  return null;
+                                }
+                              },
+                              style: TextStyle(
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2
+                                      .color),
+                              initialValue: state.profile?.description,
+                              onChanged: (value) {
+                                show = true;
+                                app
+                                    .get<ProfileCubit>()
+                                    .updateDescription(value);
+                              },
+                              onFieldSubmitted: (value) {
+                                show = false;
+                                app.get<ProfileCubit>().writeNewDescription();
+                              },
+                              maxLengthEnforcement:
+                                  MaxLengthEnforcement.enforced,
+                              maxLength: 100,
+                              maxLines: 3,
+                              decoration: InputDecoration(
+                                hintMaxLines: 3,
+                                hintStyle: TextStyle(
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        .color),
+                                border: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                                enabledBorder: InputBorder.none,
+                                errorBorder: InputBorder.none,
+                                disabledBorder: InputBorder.none,
+                                contentPadding:
+                                    EdgeInsets.all(size.width * 0.05),
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.always,
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     ),
                   ),
                   Positioned(
-                    child: CustomAvatar(imageUrl: state.profile?.avatarUrl),
+                    child: CustomAvatar(
+                        imageUrl: state.profile?.avatarUrl, size: size),
                     top: size.height * 0.075,
                     left: size.width * 0.04,
                   ),
@@ -186,74 +227,9 @@ class ProfileScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.headline1),
                   )
                 ],
-              ),
-            ),
-          ),
-        ),
+              ));
+        }),
       ),
-    );
-  }
-}
-
-_displayDialog(BuildContext context) async {
-  return showDialog(
-      context: context,
-      builder: (_) {
-        return UserNameEditDialog();
-      });
-}
-
-class UserNameEditDialog extends StatelessWidget {
-  // Pass the user, which name may be changed trough this widget
-
-  @override
-  Widget build(BuildContext context) {
-    final textEditingController = TextEditingController();
-    final _formKey = GlobalKey<FormState>();
-
-    return AlertDialog(
-      title: Text(
-        'Meine Beschreibung',
-        style: TextStyle(fontSize: 18),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Form(
-            key: _formKey,
-            child: TextFormField(
-              decoration: InputDecoration(
-                  hintText: "Nothing", contentPadding: EdgeInsets.all(0.0)),
-              controller: textEditingController,
-              validator: (val) =>
-                  val.trim().length < 3 || val.trim().length > 18
-                      ? 'Bitte gib einen gültigen Benutzernamen ein.'
-                      : null,
-            ),
-          ),
-        ],
-      ),
-      actions: <Widget>[
-        IconButton(
-          icon: Icon(Icons.close),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
-        IconButton(
-          icon: Icon(Icons.check),
-          onPressed: () async {
-            if (_formKey.currentState.validate()) {
-              //profile.des = textEditingController.text;
-              print(textEditingController.text);
-              app
-                  .get<ProfileCubit>()
-                  .writeNewDescription(textEditingController.text);
-              Navigator.of(context).pop();
-
-              //await userRepository.updateUser(user: userData);
-            }
-          },
-        )
-      ],
     );
   }
 }

@@ -111,7 +111,7 @@ class NavigatorService {
         break;
       default:
         _log.fine('navigating to $routeName, default Screen');
-        screen = ProfileScreen();
+        screen = HomeScreen();
         break;
     }
 
