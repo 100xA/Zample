@@ -16,7 +16,7 @@ git clone -b master https://github.com/Jbinoggi/zample.git
 ```
 
 ### Release
-1. Navigate to [Releases] (https://github.com/Jbinoggi/zample/releases)
+1. Navigate to [Releases](https://github.com/Jbinoggi/zample/releases)
 2. Open Assets of the newest Release number
 3. Download apk-release.apk
 
