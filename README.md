@@ -1,9 +1,12 @@
-<h1 align="center">Welcome to Zample 👋</h1>
+<div align="center"><img width="125" alt="Logo_Zample_Rund_PNG" src="https://user-images.githubusercontent.com/24482713/130572256-9b32aefa-c49d-4f21-9e2f-6fecd4dc65ca.png"></div>
+<h1 align="center">Welcome to Zample </h1>
+
+
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.2-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> An Flutter Project for Idea validation
+> An Application for Idea Validation with a wonderful community!
 
 ## Install
 
@@ -15,7 +18,7 @@ git clone -b master https://github.com/Jbinoggi/zample.git
 
 👤 **Jan Biernacki**
 
-* Website: pstarterapp.de
+* Website: [pstarterapp.de](https://pstarterapp.de)
 * Github: [@Jbinoggi](https://github.com/Jbinoggi)
 * LinkedIn: [@Jan Biernacki](https://www.linkedin.com/in/jan-biernacki-934221200/)
 
