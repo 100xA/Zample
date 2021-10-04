@@ -187,7 +187,8 @@ class ProfileScreen extends StatelessWidget {
                                 color:
                                     Theme.of(context).textTheme.bodyText2.color,
                               ),
-                              initialValue: state.profile?.description,
+                              initialValue:
+                                  state.profile?.description ?? "Lädt...",
                               onChanged: (value) {
                                 show = true;
                                 app

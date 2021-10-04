@@ -3,27 +3,19 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:zample/components/profile/bloc/cubit/profile_cubit.dart';
 import 'package:zample/core/bloc/auth/cubit/auth_cubit.dart';
+import 'package:zample/core/bloc/theme/themes.dart';
 import 'package:zample/core/services/service_locator.dart';
 import 'package:zample/misc/theme/colors.dart';
+import 'package:zample/misc/widgets/zamp_app_bar.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () => {Navigator.of(context).pop()},
-          iconSize: 30,
-          icon: const Icon(Icons.chevron_left_sharp, color: yellowColor),
-        ),
-        title: Text(
-          "Einstellungen",
-          textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headline1,
-        ),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: Theme.of(context).backgroundColor,
+      appBar: ZampAppBar(
+        actionIcon: null,
+        actionText: null,
+        titleText: "Einstellungen",
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
@@ -50,7 +42,9 @@ class SettingsScreen extends StatelessWidget {
                   SnackBar(
                     content: Text(
                       'Bist du dir sicher, dass du deinen Account löschen willst?',
-                      style: Theme.of(context).textTheme.headline3,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.headline3.color,
+                      ),
                     ),
                     // ignore: avoid_redundant_argument_values
                     duration: const Duration(seconds: 4),

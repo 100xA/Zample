@@ -2,7 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:zample/core/error_handler/zample_error_handler.dart';
+import 'package:zample/core/error/zample_error_handler.dart';
 import 'package:zample/core/widgets/global_bloc_provider.dart';
 import 'package:zample/zample.dart';
 
