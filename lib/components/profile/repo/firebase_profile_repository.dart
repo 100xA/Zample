@@ -58,6 +58,7 @@ class FirebaseProfileRepository extends ProfileRepository {
         .child("users/${FirebaseAuth.instance.currentUser.uid}/profile.jpg");
     try {
       await refPic.delete();
+      // ignore: empty_catches
     } catch (e) {}
   }
 }

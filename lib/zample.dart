@@ -13,17 +13,19 @@ import 'core/services/service_locator.dart';
 class Zample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ThemeCubit, ThemeState>(builder: (context, state) {
-      return WillPopScope(
-        onWillPop: () async => false,
-        child: MaterialApp(
-          theme: darkTheme,
-          debugShowCheckedModeBanner: false,
-          navigatorKey: app.get<NavigatorService>().key,
-          onGenerateRoute: app.get<NavigatorService>().onGenerateRoute,
-          initialRoute: app.get<NavigatorService>().initialRoute,
-        ),
-      );
-    });
+    return BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return WillPopScope(
+          onWillPop: () async => false,
+          child: MaterialApp(
+            theme: darkTheme,
+            debugShowCheckedModeBanner: false,
+            navigatorKey: app.get<NavigatorService>().key,
+            onGenerateRoute: app.get<NavigatorService>().onGenerateRoute,
+            initialRoute: app.get<NavigatorService>().initialRoute,
+          ),
+        );
+      },
+    );
   }
 }

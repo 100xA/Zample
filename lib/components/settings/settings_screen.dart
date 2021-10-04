@@ -27,33 +27,32 @@ class SettingsScreen extends StatelessWidget {
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: SafeArea(
-        child: Container(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Allgemeines",
-                  style: Theme.of(context).textTheme.headline2,
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Allgemeines",
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () => app<AuthCubit>().logOutRequested(),
+                child: Text(
+                  "Logout",
+                  style: Theme.of(context).textTheme.button,
                 ),
-                SizedBox(height: 20),
-                InkWell(
-                  onTap: () => app<AuthCubit>().logOutRequested(),
-                  child: Text(
-                    "Logout",
-                    style: Theme.of(context).textTheme.button,
-                  ),
-                ),
-                SizedBox(height: 20),
-                InkWell(
-                  onTap: () =>
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () => ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
                     content: Text(
                       'Bist du dir sicher, dass du deinen Account löschen willst?',
                       style: Theme.of(context).textTheme.headline3,
                     ),
+                    // ignore: avoid_redundant_argument_values
                     duration: const Duration(seconds: 4),
                     backgroundColor: yellowColor,
                     action: SnackBarAction(
@@ -63,59 +62,61 @@ class SettingsScreen extends StatelessWidget {
                       },
                       textColor: Theme.of(context).textTheme.headline3.color,
                     ),
-                  )),
-                  child: Text(
-                    "Account löschen",
-                    style: Theme.of(context).textTheme.button,
                   ),
                 ),
-                SizedBox(height: 25),
-                Divider(color: Theme.of(context).primaryColor),
-                SizedBox(height: 25),
-                Text(
-                  "Links",
-                  style: Theme.of(context).textTheme.headline2,
+                child: Text(
+                  "Account löschen",
+                  style: Theme.of(context).textTheme.button,
                 ),
-                SizedBox(height: 20),
-                InkWell(
-                  onTap: () async => await canLaunch(
-                          "https://www.notion.so/Rechtliches-3a5c4405a235440f9f37316195fa0559")
-                      ? await launch(
-                          "https://www.notion.so/Rechtliches-3a5c4405a235440f9f37316195fa0559")
-                      : throw 'Der Link funktioniert nicht',
-                  child: Text(
-                    "Rechtliches",
-                    style: Theme.of(context).textTheme.button,
-                  ),
+              ),
+              const SizedBox(height: 25),
+              Divider(color: Theme.of(context).primaryColor),
+              const SizedBox(height: 25),
+              Text(
+                "Links",
+                style: Theme.of(context).textTheme.headline2,
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () async => await canLaunch(
+                  "https://www.notion.so/Rechtliches-3a5c4405a235440f9f37316195fa0559",
+                )
+                    ? await launch(
+                        "https://www.notion.so/Rechtliches-3a5c4405a235440f9f37316195fa0559",
+                      )
+                    : throw 'Der Link funktioniert nicht',
+                child: Text(
+                  "Rechtliches",
+                  style: Theme.of(context).textTheme.button,
                 ),
-                SizedBox(height: 20),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    "Datenschutz",
-                    style: Theme.of(context).textTheme.button,
-                  ),
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  "Datenschutz",
+                  style: Theme.of(context).textTheme.button,
                 ),
-                SizedBox(height: 20),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    "Impressum",
-                    style: Theme.of(context).textTheme.button,
-                  ),
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  "Impressum",
+                  style: Theme.of(context).textTheme.button,
                 ),
-                SizedBox(height: 20),
-                InkWell(
-                  onTap: () {},
-                  child: Text(
-                    "Über uns",
-                    style: Theme.of(context).textTheme.button,
-                  ),
+              ),
+              const SizedBox(height: 20),
+              InkWell(
+                onTap: () {},
+                child: Text(
+                  "Über uns",
+                  style: Theme.of(context).textTheme.button,
                 ),
-                SizedBox(height: 25),
-                Divider(color: Theme.of(context).primaryColor),
-              ],
-            ),
+              ),
+              const SizedBox(height: 25),
+              Divider(color: Theme.of(context).primaryColor),
+            ],
           ),
         ),
       ),

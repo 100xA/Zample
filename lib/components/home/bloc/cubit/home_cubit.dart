@@ -6,8 +6,10 @@ class HomeCubit extends Cubit<HomeState> {
   void switchToTab(
     int index,
   ) {
-    emit(HomeState(
-      index: index,
-    ));
+    emit(
+      HomeState(
+        index: index,
+      ),
+    );
   }
 }

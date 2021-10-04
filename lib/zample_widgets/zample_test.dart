@@ -9,7 +9,7 @@ class ZampleTest extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SocialLinksCubit>(
       create: (_) => SocialLinksCubit(),
-      child: Container(child: Text("Jan")),
+      child: const Text("Jan"),
     );
   }
 }
