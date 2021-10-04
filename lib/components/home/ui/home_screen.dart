@@ -20,7 +20,6 @@ class HomeScreen extends StatelessWidget {
         body: _buildBody(state),
         bottomNavigationBar: ZampleBottomNavyBar(
           curve: Curves.easeIn,
-          showElevation: true,
           backgroundColor: Theme.of(context).highlightColor,
           selectedIndex: state.index,
           containerHeight: size.height * 0.08,
@@ -38,14 +37,15 @@ class HomeScreen extends StatelessWidget {
                   : const Icon(Icons.home),
             ),
             ZampleBottomNavyBarItem(
-                title: Text("Chat", style: Theme.of(context).textTheme.button),
-                activeColor: Theme.of(context).backgroundColor,
-                icon: state.index == 1
-                    ? const Icon(
-                        Icons.chat_bubble,
-                        color: yellowColor,
-                      )
-                    : const Icon(Icons.chat_bubble)),
+              title: Text("Chat", style: Theme.of(context).textTheme.button),
+              activeColor: Theme.of(context).backgroundColor,
+              icon: state.index == 1
+                  ? const Icon(
+                      Icons.chat_bubble,
+                      color: yellowColor,
+                    )
+                  : const Icon(Icons.chat_bubble),
+            ),
             ZampleBottomNavyBarItem(
               activeColor: Theme.of(context).backgroundColor,
               icon: state.index == 2
@@ -93,9 +93,12 @@ class HomeScreen extends StatelessWidget {
         );
 
       default:
-        return Center(
-            child: Text(
-                "Es scheint ein Problem mit der App zu geben, starte bitte die App neu"));
+        return const Center(
+          // ignore: require_trailing_commas
+          child: Text(
+            "Es scheint ein Problem mit der App zu geben, starte bitte die App neu",
+          ),
+        );
     }
   }
 }

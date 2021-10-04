@@ -16,7 +16,9 @@ class ProfileState extends Equatable {
     bool loading,
   }) =>
       ProfileState(
-          profile: profile ?? this.profile, loading: loading ?? this.loading);
+        profile: profile ?? this.profile,
+        loading: loading ?? this.loading,
+      );
 
   @override
   List<Object> get props => [profile, loading];

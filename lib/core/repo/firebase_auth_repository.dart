@@ -1,19 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:zample/core/repo/auth_repository.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 class FirebaseAuthRepository extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final FacebookAuth _facebookAuth;
 
-  FirebaseAuthRepository(
-      {FirebaseAuth firebaseAuth,
-      GoogleSignIn googleSignIn,
-      FacebookAuth facebookAuth})
-      : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
+  FirebaseAuthRepository({
+    FirebaseAuth firebaseAuth,
+    GoogleSignIn googleSignIn,
+    FacebookAuth facebookAuth,
+  })  : _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _googleSignIn = googleSignIn ?? GoogleSignIn.standard(),
         _facebookAuth = facebookAuth ?? FacebookAuth.instance;
 

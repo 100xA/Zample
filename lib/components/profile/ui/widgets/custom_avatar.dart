@@ -16,29 +16,30 @@ class CustomAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => app.get<ProfileCubit>().pickNewImage(context),
-        child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: CachedNetworkImage(
-              imageUrl: imageUrl,
-              imageBuilder: (context, imageProvider) => Container(
-                width: size.width * 0.3,
-                height: size.height * 0.2,
-                decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  image: DecorationImage(
-                    image: imageProvider,
-                    fit: BoxFit.cover,
-                  ),
-                ),
+      onTap: () => app.get<ProfileCubit>().pickNewImage(context),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(15),
+        child: CachedNetworkImage(
+          imageUrl: imageUrl,
+          imageBuilder: (context, imageProvider) => Container(
+            width: size.width * 0.3,
+            height: size.height * 0.2,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: imageProvider,
+                fit: BoxFit.cover,
               ),
-              progressIndicatorBuilder: (context, url, downloadProgress) =>
-                  CircularProgressIndicator(
-                value: downloadProgress.progress,
-              ),
-              errorWidget: (context, url, error) => ClipRRect(
-                child: Image.asset('assets/images/blank-profile-picture.png'),
-              ),
-            )));
+            ),
+          ),
+          progressIndicatorBuilder: (context, url, downloadProgress) =>
+              CircularProgressIndicator(
+            value: downloadProgress.progress,
+          ),
+          errorWidget: (context, url, error) => ClipRRect(
+            child: Image.asset('assets/images/blank-profile-picture.png'),
+          ),
+        ),
+      ),
+    );
   }
 }

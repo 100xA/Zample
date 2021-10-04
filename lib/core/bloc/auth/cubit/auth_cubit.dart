@@ -10,7 +10,7 @@ import 'package:zample/core/services/service_locator.dart';
 
 class AuthCubit extends Cubit<dynamic> {
   AuthCubit() : super("");
-  static const LightBulbImageUrl =
+  static const lightBulbImageUrl =
       'https://firebasestorage.googleapis.com/v0/b/zample-95803.appspot.com/o/ressources%2Fexternal-content.duckduckgo.com.png?alt=media&token=c4048d1a-4d3a-471f-96eb-03b9d3c1a6a1';
   final AuthRepository _authRepository = app.get<AuthRepository>();
   final NavigatorService _navigatorService = app.get<NavigatorService>();
@@ -33,7 +33,7 @@ class AuthCubit extends Cubit<dynamic> {
 
   Future<Profile> _createDefaultProfile(User usr) async {
     return Profile(
-      avatarUrl: LightBulbImageUrl,
+      avatarUrl: lightBulbImageUrl,
       uid: usr.uid,
       email: usr.email,
       username:
@@ -45,6 +45,7 @@ class AuthCubit extends Cubit<dynamic> {
   Future<void> logOutRequested() async {
     await _authRepository.signOut();
 
+    // ignore: await_only_futures
     await app.get<ProfileCubit>().reset();
 
     // navigate to landing

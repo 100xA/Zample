@@ -25,7 +25,7 @@ class SocialLinksCubit extends Cubit<SocialLinksState> {
     String error =
         "Es ist ein Fehler bei der Anmeldung aufgetreten, oder du hast dich mit einem anderem Service angemeldet!";
     try {
-      final credentials = await _authRepository.logInWithGoogle();
+      await _authRepository.logInWithGoogle();
       emit(state.copyWith(error: "", loading: false));
       await _authCubit.initialize();
       _navigatorService.pushReplacementNamed(HomeScreen.route);
@@ -72,8 +72,13 @@ class SocialLinksCubit extends Cubit<SocialLinksState> {
     try {
       _navigatorService.pushReplacementNamed(HomeScreen.route);
     } catch (e) {
-      emit(state.copyWith(
-          error: e.toString(), loading: false, authenticated: false));
+      emit(
+        state.copyWith(
+          error: e.toString(),
+          loading: false,
+          authenticated: false,
+        ),
+      );
       FirebaseCrashlytics.instance.recordError(e, null);
     }
   }

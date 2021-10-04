@@ -27,8 +27,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> initialize() async {
     if (!_initialized) {
       final Profile profile = await _profileRepository.get();
-      print(profile.description);
-      await emit(state.copyWith(profile: profile));
+      emit(state.copyWith(profile: profile));
       _profileSubscription = _profileRepository.profileStream.listen(
         (data) => emit(state.copyWith(profile: data)),
       );
@@ -59,6 +58,7 @@ class ProfileCubit extends Cubit<ProfileState> {
         maxWidth: 500,
         androidUiSettings: AndroidUiSettings(
           toolbarTitle: "Mein Profilbild",
+          // ignore: use_build_context_synchronously
           toolbarColor: Theme.of(context).highlightColor,
           toolbarWidgetColor: Colors.white,
           lockAspectRatio: true,
@@ -75,31 +75,36 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       /// store link to image to firestore
       state.profile.copyWith(avatarUrl: await ref.getDownloadURL());
-      print(ref.getDownloadURL().toString());
+
       await app.get<ProfileRepository>().update(
-              profile: Profile(
-            description: state.profile.description,
-            avatarUrl: await ref.getDownloadURL(),
-            email: state.profile.email,
-            uid: state.profile.uid,
-            username: state.profile.username,
-          ));
+            profile: Profile(
+              description: state.profile.description,
+              avatarUrl: await ref.getDownloadURL(),
+              email: state.profile.email,
+              uid: state.profile.uid,
+              username: state.profile.username,
+            ),
+          );
 
       emit(state);
     }
   }
 
   Future<void> updateDescription(String description) async {
-    emit(state.copyWith(
-        profile: state.profile.copyWith(description: description)));
-    await emit(state);
+    emit(
+      state.copyWith(
+        profile: state.profile.copyWith(description: description),
+      ),
+    );
+    emit(state);
   }
 
   Future<void> writeNewDescription() async {
     final Profile profile = state.profile;
 
     await app.get<ProfileRepository>().update(
-        profile: profile.copyWith(description: state.profile.description));
+          profile: profile.copyWith(description: state.profile.description),
+        );
   }
 
   Future<void> deleteAcc() async {

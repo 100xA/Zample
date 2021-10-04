@@ -24,7 +24,8 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
   ZampleErrorHandler(
-      child: GlobalBlocProvider(
-    child: Zample(),
-  ));
+    child: GlobalBlocProvider(
+      child: Zample(),
+    ),
+  );
 }

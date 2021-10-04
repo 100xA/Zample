@@ -9,7 +9,7 @@ import 'package:flutter/widgets.dart';
 /// Update [selectedIndex] to change the selected item.
 /// [selectedIndex] is required and must not be null.
 class ZampleBottomNavyBar extends StatelessWidget {
-  ZampleBottomNavyBar({
+  const ZampleBottomNavyBar({
     Key key,
     this.selectedIndex = 0,
     this.showElevation = true,
@@ -85,6 +85,7 @@ class ZampleBottomNavyBar extends StatelessWidget {
           child: Row(
             mainAxisAlignment: mainAxisAlignment,
             children: items.map((item) {
+              // ignore: prefer_final_locals
               var index = items.indexOf(item);
               return GestureDetector(
                 onTap: () => onItemSelected(index),
@@ -142,13 +143,15 @@ class _ItemWidget extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           child: Container(
             width: isSelected ? 130 : 50,
-            padding: EdgeInsets.symmetric(horizontal: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 12),
             child: Row(
               mainAxisSize: MainAxisSize.min,
+              // ignore: avoid_redundant_argument_values
               mainAxisAlignment: MainAxisAlignment.start,
+              // ignore: avoid_redundant_argument_values
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 IconTheme(
@@ -156,6 +159,7 @@ class _ItemWidget extends StatelessWidget {
                     size: iconSize,
                     color: isSelected
                         ? item.activeColor.withOpacity(1)
+                        // ignore: prefer_if_null_operators
                         : item.inactiveColor == null
                             ? item.activeColor
                             : item.inactiveColor,
@@ -165,7 +169,7 @@ class _ItemWidget extends StatelessWidget {
                 if (isSelected)
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: DefaultTextStyle.merge(
                         style: TextStyle(
                           color: item.activeColor,

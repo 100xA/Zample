@@ -50,11 +50,13 @@ class NavigatorService {
     RouteType type = RouteType.defaultRoute,
     Map<String, dynamic> arguments,
   }) {
-    key.currentState
-        .pushReplacementNamed<void, void>(route, arguments: <String, dynamic>{
-      'routeType': type,
-      ...?arguments,
-    });
+    key.currentState.pushReplacementNamed<void, void>(
+      route,
+      arguments: <String, dynamic>{
+        'routeType': type,
+        ...?arguments,
+      },
+    );
   }
 
   /// A convenience method to push a named route.

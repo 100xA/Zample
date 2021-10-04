@@ -17,12 +17,13 @@ class Profile extends Equatable {
   /// description of the user -> either user-changed or "Meine Beschreibung" as default
   final String description;
 
-  const Profile(
-      {@required this.uid,
-      @required this.avatarUrl,
-      @required this.email,
-      @required this.username,
-      @required this.description});
+  const Profile({
+    @required this.uid,
+    @required this.avatarUrl,
+    @required this.email,
+    @required this.username,
+    @required this.description,
+  });
 
   factory Profile.fromJson(Map<String, dynamic> map) => Profile(
         uid: map['uid'] as String,
@@ -40,12 +41,13 @@ class Profile extends Equatable {
         "description": description
       };
 
-  Profile copyWith(
-          {String uid,
-          String avatarUrl,
-          String email,
-          String username,
-          String description}) =>
+  Profile copyWith({
+    String uid,
+    String avatarUrl,
+    String email,
+    String username,
+    String description,
+  }) =>
       Profile(
         uid: uid ?? this.uid,
         avatarUrl: avatarUrl ?? this.avatarUrl,
