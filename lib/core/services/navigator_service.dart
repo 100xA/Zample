@@ -8,7 +8,7 @@ import 'package:zample/components/profile/ui/profile_screen.dart';
 import 'package:zample/core/repo/auth_repository.dart';
 import 'package:zample/core/services/service_locator.dart';
 import 'package:zample/misc/routes/fade_route.dart';
-import 'package:zample/zample_widgets/zample_test.dart';
+import 'package:zample/misc/widgets/zample_test.dart';
 
 /// The [RouteType] determines what [PageRoute] is used for the new route.
 ///

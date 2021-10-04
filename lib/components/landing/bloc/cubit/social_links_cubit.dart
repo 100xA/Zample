@@ -66,6 +66,7 @@ class SocialLinksCubit extends Cubit<SocialLinksState> {
     }
   }
 
+  /// No Login needs to be reworked, see #3
   Future<void> noLogin() async {
     emit(state.copyWith(error: "", loading: true, authenticated: false));
 

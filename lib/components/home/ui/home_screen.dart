@@ -7,7 +7,7 @@ import 'package:zample/components/profile/bloc/cubit/profile_cubit.dart';
 import 'package:zample/components/profile/ui/profile_screen.dart';
 import 'package:zample/core/services/service_locator.dart';
 import 'package:zample/misc/theme/colors.dart';
-import 'package:zample/zample_widgets/zample_bottom_navy_bar.dart';
+import 'package:zample/misc/widgets/zample_bottom_navy_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   static const String route = 'home_screen';
