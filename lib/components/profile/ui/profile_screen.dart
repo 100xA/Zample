@@ -162,21 +162,22 @@ class ProfileScreen extends StatelessWidget {
                                   return Text(
                                     '$currentLength/$maxLength',
                                     style: TextStyle(
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            .color),
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1
+                                          .color,
+                                    ),
                                   );
                                 } else {
                                   return null;
                                 }
                               },
                               style: TextStyle(
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .bodyText2
-                                      .color),
-                              initialValue: state.profile?.description,
+                                color:
+                                    Theme.of(context).textTheme.bodyText2.color,
+                              ),
+                              initialValue:
+                                  state.profile?.description ?? "Lädt...",
                               onChanged: (value) {
                                 show = true;
                                 app
@@ -194,10 +195,11 @@ class ProfileScreen extends StatelessWidget {
                               decoration: InputDecoration(
                                 hintMaxLines: 3,
                                 hintStyle: TextStyle(
-                                    color: Theme.of(context)
-                                        .textTheme
-                                        .bodyText2
-                                        .color),
+                                  color: Theme.of(context)
+                                      .textTheme
+                                      .bodyText2
+                                      .color,
+                                ),
                                 border: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                                 enabledBorder: InputBorder.none,

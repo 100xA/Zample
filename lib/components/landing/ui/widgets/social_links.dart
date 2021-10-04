@@ -1,11 +1,11 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 import 'package:zample/components/landing/bloc/cubit/social_links_cubit.dart';
 import 'package:zample/components/landing/bloc/cubit/social_links_state.dart';
 import 'package:zample/misc/theme/colors.dart';
+import 'package:zample/misc/widgets/zamp_snack_bar.dart';
 
 class SocialLinks extends StatelessWidget {
   @override
@@ -14,7 +14,8 @@ class SocialLinks extends StatelessWidget {
 
     return BlocListener<SocialLinksCubit, SocialLinksState>(
       listener: (context, state) {
-        if (state.error.trim().isNotEmpty) {
+        if (state.error.isNotEmpty) {
+          /// here needs to be an implementation of the [ZampSnackBar]
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -41,11 +42,24 @@ class SocialLinks extends StatelessWidget {
               height: 90,
             ),
             InkWell(
-              onTap: () => context.read<SocialLinksCubit>().noLogin(),
+              onTap: () => ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      "Zurzeit nicht verfügbar",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    duration: const Duration(seconds: 2),
+                  ),
+                ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Or continue without a profile",
+                  Text("Weiter ohne Profil",
                       style: Theme.of(context).textTheme.headline6),
                   Icon(
                     Icons.arrow_forward_ios,
