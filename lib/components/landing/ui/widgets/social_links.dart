@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:zample/components/landing/bloc/cubit/social_links_cubit.dart';
 import 'package:zample/components/landing/bloc/cubit/social_links_state.dart';
+import 'package:zample/gen/assets.gen.dart';
 import 'package:zample/misc/theme/colors.dart';
 import 'package:zample/misc/widgets/zamp_snack_bar.dart';
 
@@ -80,8 +81,8 @@ class LoginOptions extends StatefulWidget {
 
 class _LoginOptionsState extends State<LoginOptions> {
   final List<String> imgList = [
-    "assets/images/google.png",
-    "assets/images/facebook.png",
+    Assets.images.google.path,
+    Assets.images.facebook.path,
   ];
   int _current = 0;
   final CarouselController _controller = CarouselController();
