@@ -12,6 +12,13 @@ Some interesting features:
   the ability to navigate and to show on screen messages from anywhere in the app.
 * [firebase_auth](https://pub.dev/packages/firebase_auth) for the firebase authentication and [firebase_core](https://pub.dev/packages/firebase_core) for the general backend.
 
+| Stack | Technology |
+| ------ | ------------------|
+| Language | Dart|
+|Frameworks | Flutter| 
+| Server | Firebase |
+| Architecture | BLoC/Cubit|
+
 
 This application is no longer active.
 
